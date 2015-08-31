@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Node Js and Npm Introduction</title>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-background="#ffffff">
+					<img src="image/npm-logo.svg" width="300px" style="border: inherit; box-shadow: inherit; background: transparent;">
+					<h5>Treinamento <a href="http://www.vml.com" target="_blank">VML</a> para Novo Portal <a href="http://www.oi.com.br" target="_blank">Oi</a></h5>
+					<p>
+						<small>Créditos <a href="http://andrevalle.co" target="_blank">André Valle</a> / <a href="http://twitter.com/andrevalle1" target="_blank">@andrevalle1</a></small>
+					</p>
+				</section>
+
+				<section data-background="#fff">
+					<img data-src="image/nodejs-logo.png" height="300" width="600" style="border: inherit; box-shadow: inherit; background: transparent;" />
+				</section>
+
+				<section data-transition="slide">
+					<section>
+						<h2>O que vamos ver no treinamento?</h2>
+					</section>
+					<section>
+						<ul>
+							<li>História</li>
+							<li>O que é NodeJs</li>
+							<li>Qual seu objetivo</li>
+							<li>Modelo Input/Output - I/O</li>
+							<li>Real-Time</li>
+							<li>Cases de sucesso</li>
+							<li>Instalação NodeJs</li>
+							<li>Introdução ao NPM - (Node Package Modules)</li>
+							<li>Conceitos basicos</li>
+							<li>Como utilizar</li>
+							<li>Show me the code</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section>
+						<h2>Um pouco de história</h2>
+						<img src="image/homem_computador.jpg" height="193" width="550">
+					</section>
+					<section>
+						<div>
+							<p>Criado por Ryan Dahl em 2009</p>
+							<img src="image/RyanDahl.jpg">
+						</div>
+					</section>
+					<section>
+						<div>
+							<p>Ryan Dahl junto a  14 outras pessoas resolveram criar algo que fosse não-bloqueante (non-blocking thread ).</p>
+							<p>Uma das inspirações de Ryan Dahl para criar Node.js foi ao notar a barra de progresso de upload de arquivos no Flickr, ele percebeu que o navegador não sabia o quanto do arquivo foi carregado e tinha que consultar repetidamente ao servidor.</p>
+							<p>(Veremos exemplos mais tarde).</p>
+						</div>
+					</section>
+					<section>
+						<p>Seu desenvolvimento é mantido pela empresa</p>
+						<img src="image/logo-black.svg" style="border: inherit; box-shadow: inherit; background: transparent;">
+					</section>
+					<section>
+						<h2>Ok, agora vamos ao que interessa.</h2>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section data-transition="concave">
+						<h2>NodeJs</h2>
+						<h5>Quem é esse cara?</h5>
+					</section>
+					<section data-transition="concave">
+						<h2>O que o NodeJs não é?</h2>
+						<p class="fragment">Node.js não é uma linguagem de programação</p>
+					</section>
+					<section data-transition="concave">
+						<p>NodeJs é um interpretador de código JavaScript que funciona do lado do servidor.</p>
+					</section>
+					<section data-transition="concave">
+						<p>
+							Seu objetivo é facilitar a criação de aplicações de alta escalabilidade (como um servidor web), com códigos capazes de manipular dezenas de milhares de conexões simultâneas, em uma única máquina física.
+						</p>
+					</section>
+					<section data-transition="concave">
+						<p>
+							O NodeJs foi baseado no interpretador V8 do Google Chrome.
+						</p>
+						<p>
+							(Node foi escrito em C++ e Javascript V8 com +ou- 8000 linhas em C++ e +ou- 2000 linhas de Javascript V8).
+						</p>
+					</section>
+				</section>
+
+				<section data-transition="zoom">
+					<section>
+						<p>Node.js usa um modelo de I/O direcionada a evento não bloqueante.</p>
+						<br>
+						<p class="fragment">Thread non-blocking</p>
+					</section>
+					<section>
+						<h3>O que é isso?</h3>
+					</section>
+					<section>
+						<p>Os servidores Apache, Nginx ou Tomcat tem uma característica em comum, que é conhecida como modelo bloqueante.</p>
+						<p class="fragment">Blocking-Thread</p>
+					</section>
+					<section>
+						<h4>Exemplo como funciona:</h4>
+					</section>
+					<section>
+						<h2>Outros servidores</h2>
+						<ul>
+							<li class="fragment">Cliente faz uma requisição</li>
+							<li class="fragment">Servidor atende e processa a requisição</li>
+							<li class="fragment">Servidor devolve a resposta para o cliente</li>
+							<li class="fragment">Pronto para processar uma nova requisição</li>
+						</ul>
+					</section>
+					<section data-transition="slide">
+						<h2>Node.js</h2>
+						<ul>
+							<li class="fragment">Cliente faz uma requisição</li>
+							<li class="fragment">Servidor passa a solicitação para processamento. Pronto para processar uma nova requisição</li>
+							<li class="fragment">Servidor lida com mais requisições a medida que ele vai sendo requisitado</li>
+							<li class="fragment">Servidor fornece a resposta para o cliente quando a requisição concluiu o processamento</li>
+						</ul>
+					</section>
+					<section>
+						<p>Isso porque o Node.js funciona por eventos assíncronos, o que não iremos ver neste momento.</p>
+						<a href="http://imasters.com.br/front-end/javascript/entendendo-o-event-loop-do-node-js/">IMASTERS: Event Loop</a>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section>
+						<h2>Real-time</h2>
+					</section>
+					<section>
+						<p>O NodeJS ficou popular graças aos seus frameworks que interagem em real-time entre cliente e servidor.</p>
+					</section>
+					<section>
+						<p>Frameworks: SockJS, Socket.IO, Engine.IO são alguns exemplos disso.</p>
+						<p>Eles são compatíveis com o novo protocolo WebSockets e permitem trafegar dados através de uma única conexão bi-direcional, tratando as mensagens via eventos no JavaScript.</p>
+						<a href="http://www.html5rocks.com/pt/tutorials/websockets/basics/">HTML5 ROCKS: WebSocket</a>
+					</section>
+					<section>
+						<p>Exemplo :D</p>
+						<a href="http://socket.io/demos/chat/" target="_blank">Demo/Chat</a>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section>
+						<h2>Big Cases:</h2>
+					</section>
+					<section>
+						<img src="image/cases.png" height="273" width="600" style="border: inherit; box-shadow: inherit; background: transparent;">
+					</section>
+					<section>
+						<img src="image/walmart.png" width="600" style="border: inherit; box-shadow: inherit; background: transparent;">
+					</section>
+					<section>
+						<p>55% do tráfego na Black friday foi em um servidor Node e permaneceu estável. 
+						Enquanto outros servidores ficavam instáveis e caiam por alguns milissegundos. </p>
+						<br>
+						<a href="https://nodejs.org/video/">Eran Hammer, Sr. Architect at Walmart, talks about how they use Node.js as a way to reinvent legacy APIs to create modern front end experiences.</a>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section>
+						<h2>Instalação</h2>
+					</section>
+					<section>
+						<img src="image/nodewebpage.png" width="900">
+						<a href="https://nodejs.org/">https://nodejs.org/</a>
+					</section>
+				</section>
+
+				<section data-background="#fff">
+					<section>
+						<h5>Introdução NPM</h5>
+						<img src="image/npmwebpage.png" width="900">
+					</section>
+					<section>
+						<h4>O que é NPM?</h4>
+						<div class="fragment">
+							<h4>ou</h4>
+							<h4>Node Package Modules</h4>
+						</div>
+					</section>
+					<section>
+						<h4>NPM é um gerenciador de pacotes para NodeJs</h4>
+						<ul>
+							<li class="fragment">Integrado com NodeJs desde a versão 0.6.0</li>
+							<li class="fragment">+175k modulos de NodeJs</li>
+							<li class="fragment">+30 milhões de downloads por dia</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Principais comandos npm</h4>
+						<ul>
+							<li class="fragment">
+								Cria um package.json
+								<pre><code data-trim contenteditable>
+npm init
+								</code></pre>
+							</li>
+							<li class="fragment">
+								Instala um Módulo
+								<pre><code data-trim contenteditable>
+npm install |Módulo|
+								</code></pre>
+							</li>
+							<li class="fragment">
+								Desinstala um Módulo
+								<pre><code data-trim contenteditable>
+npm uninstall |Módulo|
+								</code></pre>
+							</li>
+							<li class="fragment">
+								Atualiza um Módulo
+								<pre><code data-trim contenteditable>
+npm update |Módulo|
+								</code></pre>
+							</li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							## Anatomia do package.json
+
+							```
+{
+  "name": "ProjectName",
+  "version": "1.0.0",
+  "description": "Descrição do projeto",
+  "main": "index.js",
+  "author": "André Valle <andrevvalle@icloud.com>",
+  "license": "ISC"
+}
+
+							```
+						</script>
+					</section>
+					<section>
+						<ul>
+							<li>
+								Possibilita gerenciar as versões de pacotes
+								<pre><code data-trim contenteditable>
+npm install jquery@1.11.3
+								</code></pre>
+							</li>
+							<li>
+								Flags para ambientes
+								<pre><code data-trim contenteditable>
+npm install jquery --save
+								</code></pre>
+								<pre><code data-trim contenteditable>
+npm install gulp --save-dev
+								</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<ul>
+							<li>
+								Instalando globalmente
+								<pre><code data-trim contenteditable>
+npm install -g gulp
+								</code></pre>
+							</li>
+							<li>
+								Desinstalando globalmente
+								<pre><code data-trim contenteditable>
+npm uninstall -g gulp
+								</code></pre>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-background="image/thats-all-folks.jpg" data-background-transition="convex">
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'convex',
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
